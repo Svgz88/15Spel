@@ -25,27 +25,29 @@ public class HuvudProgram extends JFrame {
         for (int i = 0; i < knappar.length; i++) {
             if (i < 15) {
                 //Skriver knappars nummer.
-                //Knappar[i] = new JButton(String.valueOf("Knapp "+(i+1)));
+                //knappar[i] = new JButton(String.valueOf("Knapp "+(i+1)));
                 //Funka likadan som raden ovanför.
                 knappar[i] = new JButton(String.valueOf((i + 1)));
             } else {
-                knappar[i] = new JButton("");
+                knappar[i] = new JButton("\"empty\"");
             }
             panel3.add(knappar[i]);
 
-            //Kollar om den tryckta knappen är bredvid den tomma och ?
+            //Kollar om den tryckta knappen är bredvid den tomma.
             int finalI = i;
             knappar[i].addActionListener(l -> {
                 if (l.getSource() == knappar[finalI]) {
                     if (slogik.BredvidKnapp(finalI, emptyKnapp)) {
+                        //Uppdaterar den tomma knapp med texten av den tryckta knapp.
                         knappar[emptyKnapp].setText(knappar[finalI].getText());
+                        //Den tryckta knapp uppdateras till "empty".
                         knappar[finalI].setText("");
+                        //Den tomma knapp blir den tryckta knapp.
                         emptyKnapp = finalI;
 
                         if(slogik.VinnerSpel(knappar)){
                             JOptionPane.showMessageDialog(null, "Grattis! Du vann!");
                         }
-
                     }
                 }
             });
@@ -58,7 +60,6 @@ public class HuvudProgram extends JFrame {
                     if (knappar[i].getText().isEmpty()) {
                         emptyKnapp = i;
                     }
-
                 }
             }
         });
@@ -69,7 +70,6 @@ public class HuvudProgram extends JFrame {
         this.setSize(600, 350);
         this.setLocationRelativeTo(null);
     }
-
     public static void main(String[] args) {
         new HuvudProgram();
     }
